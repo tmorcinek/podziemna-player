@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 22
-    buildToolsVersion "22.0.1"
+    buildToolsVersion "21.1.2"
 
     defaultConfig {
         applicationId "pl.morcinek.podziemnaplayer"
@@ -22,4 +22,18 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.0.0'
+    compile 'com.android.support:cardview-v7:21.0.0'
+    compile 'com.android.support:recyclerview-v7:21.0.0'
+
+    provided 'pl.mg6.hrisey:hrisey:0.3.1'
+
+    compile 'com.squareup.dagger:dagger:1.2.0'
+    provided 'com.squareup.dagger:dagger-compiler:1.2.0'
+    compile 'com.google.guava:guava:18.0'
+
+    compile 'com.squareup.okhttp:okhttp:2.2.0'
+    compile 'com.squareup.okhttp:okhttp-urlconnection:2.2.0'
+
+    compile 'com.nispok:snackbar:2.10.2'
+    compile 'com.jpardogo.materialtabstrip:library:1.0.9'
 }
