@@ -1,10 +1,12 @@
 package pl.morcinek.podziemnaplayer.splash;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 
 import pl.morcinek.podziemnaplayer.R;
+import pl.morcinek.podziemnaplayer.home.HomeActivity;
 
 
 public class SplashActivity extends ActionBarActivity implements Runnable {
@@ -22,7 +24,7 @@ public class SplashActivity extends ActionBarActivity implements Runnable {
     @Override
     public void run() {
         if (!isFinishing()) {
-            // TODO Start HomeActivity
+            startActivity(new Intent(this, HomeActivity.class));
             finish();
         }
     }

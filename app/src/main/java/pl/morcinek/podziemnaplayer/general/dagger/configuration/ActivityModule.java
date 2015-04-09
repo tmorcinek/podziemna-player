@@ -5,12 +5,14 @@ import dagger.Provides;
 import pl.morcinek.podziemnaplayer.general.controllers.RefreshProgressController;
 import pl.morcinek.podziemnaplayer.general.dagger.components.DaggerActivity;
 import pl.morcinek.podziemnaplayer.general.handlers.RetryErrorHandler;
+import pl.morcinek.podziemnaplayer.home.HomeActivity;
 
 /**
  * Copyright 2014 Tomasz Morcinek. All rights reserved.
  */
 @Module(
         injects = {
+                HomeActivity.class,
         },
         addsTo = ApplicationModule.class,
         library = true

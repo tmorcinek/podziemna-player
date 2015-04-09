@@ -1,45 +1,39 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="vertical">
-
-    <View
-        android:id="@+id/status_bar"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="?colorPrimaryDark" />
+    android:layout_height="match_parent"
+    android:background="@color/primary_dark">
 
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <include
-                layout="@layout/toolbar"
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?colorPrimaryDark"/>
+        <include
+            layout="@layout/toolbar"
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?colorPrimaryDark" />
 
             <com.astuetz.PagerSlidingTabStrip
+                android:layout_below="@id/toolbar"
                 android:id="@+id/view_pager_indicator"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:overScrollMode="never"
-                android:layout_alignBottom="@id/toolbar"
                 style="@style/PagerSlidingTabStrip" />
 
             <android.support.v4.view.ViewPager
                 android:id="@+id/view_pager"
-                android:layout_below="@id/toolbar"
+                android:layout_below="@id/view_pager_indicator"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
         </RelativeLayout>
 
         <!-- The navigation drawer -->
@@ -55,4 +49,4 @@
             android:dividerHeight="0dp"
             android:background="@color/drawer_background" />
     </android.support.v4.widget.DrawerLayout>
-</LinearLayout>
+</FrameLayout>
