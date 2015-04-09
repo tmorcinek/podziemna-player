@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- theme colors -->
+    <color name="primary">#062486</color>
+    <color name="primary_dark">#020B57</color>
+    <color name="primary_light">#0B34B4</color>
+    <color name="accent">#B90711</color>
+    <color name="accent_dark">#921614</color>
+
+    <color name="splash_background">#000000</color>
+    <color name="background">#EEEEEE</color>
+
+    <color name="drawer_background">#FAFAFA</color>
+    <color name="drawer_item_highlighted">#E8E8E8</color>
+
+    <!-- button -->
+    <color name="button">#2196F3</color>
+    <color name="button_dark">#1976D2</color>
+
+    <!-- dark text colors -->
+    <color name="text">#DD000000</color>`
+    <color name="text_secondary">#89000000</color>`
+    <color name="text_disabled">#42000000</color>`
+    <color name="text_divider">#1E000000</color>`
+
+    <!-- light text colors -->
+    <color name="text_white">#FEFEFE</color>
+    <color name="text_white_highlighted">#FFFFFF</color>
+    <color name="text_white_disabled">#4CFFFFFF</color>
+    <color name="text_white_secondary">#B2FFFFFF</color>
+
+    <color name="cards">#FAFAFA</color>
+
+    <color name="retryLayoutColor">#323232</color>
+    <color name="retryLayoutSelectedColor">#474747</color>
+    <color name="retryTextColor">#FFCF00</color>
+</resources>

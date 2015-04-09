@@ -1,0 +1,27 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="horizontal_margin">16dp</dimen>
+    <dimen name="vertical_margin">16dp</dimen>
+
+    <dimen name="text_vertical_margin">8dp</dimen>
+    <dimen name="header_bottom_margin">16dp</dimen>
+
+    <dimen name="button_height">36dp</dimen>
+    <dimen name="button_min_width">36dp</dimen>
+    <dimen name="button_vertical_margin">6dp</dimen>
+    <dimen name="button_horizontal_margin">4dp</dimen>
+    <dimen name="button_horizontal_padding">8dp</dimen>
+    <dimen name="button_elevation">4dp</dimen>
+    <dimen name="button_radius">3dp</dimen>
+
+    <dimen name="item_height">46dp</dimen>
+    <dimen name="item_padding">8dp</dimen>
+
+    <dimen name="drawer_margin">-8dp</dimen>
+
+    <dimen name="drawer_list_item_height">48dp</dimen>
+    <dimen name="drawer_list_image_height">30dp</dimen>
+    <dimen name="drawer_list_item_text_margin">72dp</dimen>
+    <dimen name="drawer_list_item_text_size">16sp</dimen>
+
+</resources>
