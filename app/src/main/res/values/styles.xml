@@ -55,4 +55,10 @@
         <item name="android:textSize">@dimen/drawer_list_item_text_size</item>
     </style>
 
+    <style name="PagerSlidingTabStrip">
+        <item name="pstsPaddingMiddle">true</item>
+        <item name="pstsIndicatorHeight">4dp</item>
+        <item name="android:textColor">@color/text_white_secondary</item>
+    </style>
+
 </resources>

@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "pl.morcinek.podziemnaplayer"
-        minSdkVersion 8
+        minSdkVersion 11
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
@@ -35,4 +35,5 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.2.0'
 
     compile 'com.nispok:snackbar:2.10.2'
+    compile 'com.jpardogo.materialtabstrip:library:1.0.9'
 }
