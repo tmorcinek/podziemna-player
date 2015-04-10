@@ -1,9 +1,7 @@
 package pl.morcinek.podziemnaplayer.general.controllers;
 
-import android.app.Activity;
 import android.support.v4.widget.SwipeRefreshLayout;
 
-import pl.morcinek.podziemnaplayer.R;
 import pl.morcinek.podziemnaplayer.general.network.response.ProgressController;
 
 /**
@@ -13,8 +11,8 @@ public class RefreshProgressController implements ProgressController {
 
     private SwipeRefreshLayout swipeRefreshLayout;
 
-    public RefreshProgressController(Activity activity) {
-        this.swipeRefreshLayout = (SwipeRefreshLayout) activity.findViewById(R.id.swipe_refresh_layout);
+    public RefreshProgressController(SwipeRefreshLayout swipeRefreshLayout) {
+        this.swipeRefreshLayout = swipeRefreshLayout;
     }
 
     @Override

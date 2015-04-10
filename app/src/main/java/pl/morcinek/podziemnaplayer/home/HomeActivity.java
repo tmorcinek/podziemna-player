@@ -6,6 +6,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 
+import javax.inject.Inject;
+
 import pl.morcinek.podziemnaplayer.R;
 import pl.morcinek.podziemnaplayer.general.dagger.components.DaggerActivity;
 import pl.morcinek.podziemnaplayer.home.drawer.DrawerController;
@@ -15,6 +17,9 @@ import pl.morcinek.podziemnaplayer.home.drawer.DrawerController;
  * Copyright (c) 2015 SportingBet. All rights reserved.
  */
 public class HomeActivity extends DaggerActivity {
+
+    @Inject
+    HomeContentController homeContentController;
 
     private DrawerLayout drawerLayout;
 
@@ -37,6 +42,7 @@ public class HomeActivity extends DaggerActivity {
         DrawerController drawerController = new DrawerController(this, drawerLayout);
         if (savedInstanceState == null) {
             drawerController.showDefaultFragment();
+            homeContentController.addFragment(new ListFragment());
         } else {
             drawerToggle.onDrawerClosed(null);
         }

@@ -7,6 +7,10 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import pl.morcinek.podziemnaplayer.data.ResponseProcessor;
+import pl.morcinek.podziemnaplayer.data.network.ApiService;
+import pl.morcinek.podziemnaplayer.data.network.MockApiService;
+import pl.morcinek.podziemnaplayer.data.network.NetworkRequester;
 
 /**
  * Copyright 2014 Tomasz Morcinek. All rights reserved.
@@ -24,5 +28,23 @@ public class ApplicationModule {
     @Singleton
     Context provideApplicationContext() {
         return application;
+    }
+
+    @Provides
+    @Singleton
+    ResponseProcessor provideResponseProcessor() {
+        return new ResponseProcessor();
+    }
+
+    @Provides
+    @Singleton
+    ApiService provideApiService(ResponseProcessor responseProcessor) {
+        return new MockApiService();
+    }
+
+    @Provides
+    @Singleton
+    NetworkRequester provideNetworkRequester(ApiService apiService) {
+        return new NetworkRequester(apiService);
     }
 }
