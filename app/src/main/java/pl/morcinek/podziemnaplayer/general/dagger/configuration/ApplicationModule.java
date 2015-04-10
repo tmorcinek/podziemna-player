@@ -9,7 +9,7 @@ import dagger.Module;
 import dagger.Provides;
 import pl.morcinek.podziemnaplayer.data.ResponseProcessor;
 import pl.morcinek.podziemnaplayer.data.network.ApiService;
-import pl.morcinek.podziemnaplayer.data.network.MockApiService;
+import pl.morcinek.podziemnaplayer.data.network.ApiServiceImpl;
 import pl.morcinek.podziemnaplayer.data.network.NetworkRequester;
 
 /**
@@ -39,7 +39,7 @@ public class ApplicationModule {
     @Provides
     @Singleton
     ApiService provideApiService(ResponseProcessor responseProcessor) {
-        return new MockApiService();
+        return new ApiServiceImpl(responseProcessor);
     }
 
     @Provides

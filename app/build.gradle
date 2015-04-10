@@ -11,12 +11,27 @@ android {
         versionCode 1
         versionName "1.0"
 
-        buildConfigField 'String', 'API_ENDPOINT', '"http://podziemnatv.pl/pliki"'
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+
+    flavorDimensions 'backend'
+    productFlavors {
+        production {
+            flavorDimension 'backend'
+            buildConfigField 'String', 'API_ENDPOINT', '"http://podziemnatv.pl/pliki"'
+            ext.betaDistributionGroupAliases = "production"
+        }
+        mock {
+            flavorDimension 'backend'
+            applicationId "pl.morcinek.podziemnaplayer.mock"
+            buildConfigField 'String', 'API_ENDPOINT', '""'
+            ext.betaDistributionGroupAliases = "mock"
         }
     }
 }
