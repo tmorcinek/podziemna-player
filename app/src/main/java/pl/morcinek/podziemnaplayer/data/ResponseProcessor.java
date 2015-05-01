@@ -32,18 +32,33 @@ public class ResponseProcessor {
             Elements cells = element.getElementsByTag("td");
             Resource resource = new Resource(getFirstCellText(cells));
             for (int i = 1; i < cells.size(); i++) {
-                setupResourceWithAttribute(resource, cells.get(i), ".mp3");
-                setupResourceWithAttribute(resource, cells.get(i), ".3gp");
+                setupResourceMusicUrl(cells, resource, i);
+                setupResourceVideoUrl(cells, resource, i);
             }
             resources.add(resource);
         }
         return resources;
     }
 
-    private void setupResourceWithAttribute(Resource resource, Element dataElement, String valueSuffix) {
-        for (Element mp3Element : getElementsWithUrlSuffix(dataElement, valueSuffix)) {
-            resource.setMusicUrl(mp3Element.attr(HREF_ATTRIBUTE));
+    private void setupResourceMusicUrl(Elements cells, Resource resource, int i) {
+        String attributeValue = getAttributeValueForSuffix(cells.get(i), ".mp3");
+        if (attributeValue != null) {
+            resource.setMusicUrl(attributeValue);
         }
+    }
+
+    private void setupResourceVideoUrl(Elements cells, Resource resource, int i) {
+        String attributeValue = getAttributeValueForSuffix(cells.get(i), ".3gp");
+        if (attributeValue != null) {
+            resource.setVideoUrl(attributeValue);
+        }
+    }
+
+    private String getAttributeValueForSuffix(Element dataElement, String valueSuffix) {
+        for (Element element : getElementsWithUrlSuffix(dataElement, valueSuffix)) {
+            return element.attr(HREF_ATTRIBUTE);
+        }
+        return null;
     }
 
     private String getFirstCellText(Elements cells) {

@@ -35,5 +35,14 @@ public class ResponseProcessorTest {
 
         // then
         assertThat(resources).isNotNull().isNotEmpty().hasSize(104);
+        for (Resource resource : resources) {
+            assertResourceValue(resource.getName());
+            assertResourceValue(resource.getMusicUrl());
+            assertResourceValue(resource.getVideoUrl());
+        }
+    }
+
+    private void assertResourceValue(String value) {
+        assertThat(value).isNotNull().isNotEmpty();
     }
 }
