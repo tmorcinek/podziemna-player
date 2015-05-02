@@ -28,19 +28,28 @@ public class ApiServiceImpl implements ApiService {
 
     @Override
     public void getResources(final Callback<List<Resource>> callback) {
-        httpClient.newCall(createRequest()).enqueue(new com.squareup.okhttp.Callback() {
-
-            @Override
-            public void onFailure(Request request, IOException e) {
-                callback.failure(e);
-            }
-
-            @Override
-            public void onResponse(Response response) throws IOException {
-                List<Resource> resources = responseProcessor.retrieveDataFromStream(response.body().byteStream());
-                callback.success(resources);
+        runInBackground(new Runnable() {
+            public void run() {
+                try {
+                    Response response = httpClient.newCall(createRequest()).execute();
+                    if (response.isSuccessful()) {
+                        callback.success(processResponse(response));
+                    } else {
+                        throw new IOException("Unexpected code " + response);
+                    }
+                } catch (IOException e) {
+                    callback.failure(e);
+                }
             }
         });
+    }
+
+    private void runInBackground(Runnable runnable) {
+        new Thread(runnable).start();
+    }
+
+    private List<Resource> processResponse(Response response) throws IOException {
+        return responseProcessor.retrieveDataFromStream(response.body().byteStream());
     }
 
     private Request createRequest() {

@@ -1,6 +1,8 @@
 package pl.morcinek.podziemnaplayer.general.network;
 
 
+import android.os.Handler;
+
 import pl.morcinek.podziemnaplayer.general.network.response.NetworkResponseListener;
 import pl.morcinek.podziemnaplayer.general.network.response.ProgressController;
 
@@ -8,6 +10,8 @@ import pl.morcinek.podziemnaplayer.general.network.response.ProgressController;
  * Copyright 2014 Tomasz Morcinek. All rights reserved.
  */
 public class CallbackWrapper<T> implements Callback<T> {
+
+    private Handler handler = new Handler();
 
     private NetworkResponseListener<T> responseListener;
 
@@ -38,18 +42,28 @@ public class CallbackWrapper<T> implements Callback<T> {
     }
 
     @Override
-    public void success(T object) {
+    public void success(final T object) {
         if (responseListener != null) {
-            postExecuteWithSuccess(true);
-            responseListener.success(object);
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    postExecuteWithSuccess(true);
+                    responseListener.success(object);
+                }
+            });
         }
     }
 
     @Override
-    public void failure(Exception error) {
+    public void failure(final Exception error) {
         if (responseListener != null) {
-            postExecuteWithSuccess(false);
-            responseListener.failure(error);
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    postExecuteWithSuccess(false);
+                    responseListener.failure(error);
+                }
+            });
         }
     }
 }

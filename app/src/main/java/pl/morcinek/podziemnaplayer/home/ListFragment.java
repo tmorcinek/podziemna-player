@@ -59,12 +59,13 @@ public class ListFragment extends DaggerFragment implements Runnable, SwipeRefre
         networkRequester.initialize(this, refreshProgressController);
 
         errorHandler.registerAction(this);
+        onRefresh();
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        onRefresh();
+    public void onDestroy() {
+        super.onDestroy();
+        networkRequester.cancelRequest();
     }
 
     private void setupSwipeRefreshLayout(View view) {
