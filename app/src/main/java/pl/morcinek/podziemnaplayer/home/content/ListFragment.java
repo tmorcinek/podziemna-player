@@ -1,4 +1,4 @@
-package pl.morcinek.podziemnaplayer.home;
+package pl.morcinek.podziemnaplayer.home.content;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -83,8 +83,7 @@ public class ListFragment extends DaggerFragment implements Runnable, SwipeRefre
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity()));
-        // TODO implement adapter
-//        recyclerView.setAdapter();
+        recyclerView.setAdapter(new MusicListAdapter(getActivity()));
     }
 
     private void invokeRecyclerViewAnimation() {
@@ -107,11 +106,12 @@ public class ListFragment extends DaggerFragment implements Runnable, SwipeRefre
 
     @Override
     public void success(List<Resource> object) {
-
+        MusicListAdapter adapter = (MusicListAdapter) recyclerView.getAdapter();
+        adapter.setList(object);
     }
 
     @Override
     public void failure(Object error) {
-
+        errorHandler.handleError(error);
     }
 }

@@ -24,4 +24,5 @@
     <dimen name="drawer_list_item_text_margin">72dp</dimen>
     <dimen name="drawer_list_item_text_size">16sp</dimen>
 
+    <dimen name="list_item_height">48dp</dimen>
 </resources>

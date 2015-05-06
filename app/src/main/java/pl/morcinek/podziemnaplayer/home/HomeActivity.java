@@ -10,6 +10,7 @@ import javax.inject.Inject;
 
 import pl.morcinek.podziemnaplayer.R;
 import pl.morcinek.podziemnaplayer.general.dagger.components.DaggerActivity;
+import pl.morcinek.podziemnaplayer.home.content.ListFragment;
 import pl.morcinek.podziemnaplayer.home.drawer.DrawerController;
 
 /**

@@ -6,7 +6,7 @@ import pl.morcinek.podziemnaplayer.general.dagger.components.DaggerActivity;
 import pl.morcinek.podziemnaplayer.general.handlers.RetryErrorHandler;
 import pl.morcinek.podziemnaplayer.home.HomeActivity;
 import pl.morcinek.podziemnaplayer.home.HomeContentController;
-import pl.morcinek.podziemnaplayer.home.ListFragment;
+import pl.morcinek.podziemnaplayer.home.content.ListFragment;
 
 /**
  * Copyright 2014 Tomasz Morcinek. All rights reserved.
