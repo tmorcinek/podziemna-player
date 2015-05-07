@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/download_buttton" android:state_selected="true" />
-    <item android:drawable="@drawable/download_buttton" android:state_pressed="true" />
-    <item android:drawable="@drawable/download_buttton" />
+    <item android:drawable="@drawable/download_button_highlighted" android:state_selected="true" />
+    <item android:drawable="@drawable/download_button_highlighted" android:state_pressed="true" />
+    <item android:drawable="@drawable/download_button" />
 </selector>
