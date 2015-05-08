@@ -17,6 +17,13 @@ android {
         versionName "0.0.1"
     }
 
+    applicationVariants.all { variant ->
+        buildConfigField 'String', 'DOWNLOAD_DIRECTORY', '"Downloads"'
+
+        variant.buildConfigField 'int', 'HOME_ITEM_ID', '-1001'
+        variant.buildConfigField 'int', 'INPLAY_ITEM_ID', '-1000'
+    }
+
     buildTypes {
         release {
             minifyEnabled false

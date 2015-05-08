@@ -4,7 +4,9 @@ import android.app.DownloadManager;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Environment;
+import android.util.Log;
 
+import pl.morcinek.podziemnaplayer.BuildConfig;
 import pl.morcinek.podziemnaplayer.R;
 
 /**
@@ -26,15 +28,20 @@ public class DownloadHandler {
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
         request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE);
         request.setAllowedOverRoaming(false);
+        request.setVisibleInDownloadsUi(false);
         request.setTitle(getFileName(url));
         request.setDescription(context.getString(R.string.download_file_description));
-        request.setDestinationInExternalFilesDir(context, getDirectory(url), getUrlHashCode(url));
+        String hashCode = getUrlHashCode(url);
+        Log.e("HASH_CODE", hashCode);
+        request.setDestinationInExternalFilesDir(context, BuildConfig.DOWNLOAD_DIRECTORY, hashCode);
+//        request.allowScanningByMediaScanner();
 
         downloadManager.enqueue(request);
     }
 
     private String getDirectory(String url) {
         return isMp3(url) ? Environment.DIRECTORY_MUSIC : Environment.DIRECTORY_MOVIES;
+//        return Environment.DIRECTORY_DOWNLOADS;
     }
 
     private boolean isMp3(String url) {

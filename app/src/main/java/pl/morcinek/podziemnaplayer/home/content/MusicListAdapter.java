@@ -3,6 +3,7 @@ package pl.morcinek.podziemnaplayer.home.content;
 import android.content.Context;
 import android.os.Environment;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +12,10 @@ import android.widget.TextView;
 
 import java.io.File;
 
+import pl.morcinek.podziemnaplayer.BuildConfig;
 import pl.morcinek.podziemnaplayer.R;
 import pl.morcinek.podziemnaplayer.data.Resource;
+import pl.morcinek.podziemnaplayer.files.DownloadHandler;
 import pl.morcinek.podziemnaplayer.general.adapter.AbstractRecyclerViewAdapter;
 
 /**
@@ -20,7 +23,7 @@ import pl.morcinek.podziemnaplayer.general.adapter.AbstractRecyclerViewAdapter;
  */
 public class MusicListAdapter extends AbstractRecyclerViewAdapter<Resource, MusicListAdapter.ViewHolder> {
 
-    public static final File EXTERNAL_STORAGE_PUBLIC_DIRECTORY = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES);
+    private final File externalFilesDir;
 
     private OnResourceClickListener resourceClickListener;
 
@@ -28,6 +31,8 @@ public class MusicListAdapter extends AbstractRecyclerViewAdapter<Resource, Musi
         super(context);
         this.resourceClickListener = resourceClickListener;
         setItemClickListener(onItemClickListener);
+
+        externalFilesDir = context.getExternalFilesDir(BuildConfig.DOWNLOAD_DIRECTORY);
     }
 
     @Override
@@ -58,7 +63,7 @@ public class MusicListAdapter extends AbstractRecyclerViewAdapter<Resource, Musi
     }
 
     private boolean isDownloaded(Resource resource) {
-        return new File(EXTERNAL_STORAGE_PUBLIC_DIRECTORY, resource.getMusicUrl()).exists();
+        return new File(externalFilesDir, DownloadHandler.getUrlHashCode(resource.getMusicUrl())).exists();
     }
 
     protected class ViewHolder extends RecyclerView.ViewHolder {

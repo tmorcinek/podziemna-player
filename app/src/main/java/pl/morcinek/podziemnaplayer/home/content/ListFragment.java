@@ -19,6 +19,7 @@ import javax.inject.Inject;
 import pl.morcinek.podziemnaplayer.R;
 import pl.morcinek.podziemnaplayer.data.Resource;
 import pl.morcinek.podziemnaplayer.data.network.NetworkRequester;
+import pl.morcinek.podziemnaplayer.files.DownloadHandler;
 import pl.morcinek.podziemnaplayer.general.adapter.AbstractRecyclerViewAdapter;
 import pl.morcinek.podziemnaplayer.general.progress.RefreshProgressController;
 import pl.morcinek.podziemnaplayer.general.dagger.components.DaggerFragment;
@@ -37,6 +38,9 @@ public class ListFragment extends DaggerFragment implements Runnable, SwipeRefre
 
     @Inject
     NetworkRequester networkRequester;
+
+    @Inject
+    DownloadHandler downloadHandler;
 
     protected RefreshProgressController refreshProgressController;
 
@@ -120,7 +124,7 @@ public class ListFragment extends DaggerFragment implements Runnable, SwipeRefre
 
     @Override
     public void onResourceClicked(View view, Resource item) {
-        Toast.makeText(getActivity(), "Resource" + item, Toast.LENGTH_LONG).show();
+        downloadHandler.requestDownload(item.getMusicUrl());
     }
 
     @Override
