@@ -41,13 +41,17 @@ public abstract class AbstractRecyclerViewAdapter<T, H extends RecyclerView.View
         return items == null ? 0 : items.size();
     }
 
-    protected void initializeOnClickListener(H holder, final T item) {
+    protected void registerOnClickListener(H holder, final T item) {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 itemClickListener.onItemClicked(item);
             }
         });
+    }
+
+    protected void unregisterOnClickListener(H holder, final T item) {
+        holder.itemView.setOnClickListener(null);
     }
 
     public interface OnItemClickListener<T> {

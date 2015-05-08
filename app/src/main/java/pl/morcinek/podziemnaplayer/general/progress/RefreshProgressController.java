@@ -1,4 +1,4 @@
-package pl.morcinek.podziemnaplayer.general.controllers;
+package pl.morcinek.podziemnaplayer.general.progress;
 
 import android.support.v4.widget.SwipeRefreshLayout;
 

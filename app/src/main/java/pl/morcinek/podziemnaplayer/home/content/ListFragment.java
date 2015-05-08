@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -18,7 +19,8 @@ import javax.inject.Inject;
 import pl.morcinek.podziemnaplayer.R;
 import pl.morcinek.podziemnaplayer.data.Resource;
 import pl.morcinek.podziemnaplayer.data.network.NetworkRequester;
-import pl.morcinek.podziemnaplayer.general.controllers.RefreshProgressController;
+import pl.morcinek.podziemnaplayer.general.adapter.AbstractRecyclerViewAdapter;
+import pl.morcinek.podziemnaplayer.general.progress.RefreshProgressController;
 import pl.morcinek.podziemnaplayer.general.dagger.components.DaggerFragment;
 import pl.morcinek.podziemnaplayer.general.handlers.RetryErrorHandler;
 import pl.morcinek.podziemnaplayer.general.network.response.NetworkResponseListener;
@@ -28,7 +30,7 @@ import pl.morcinek.podziemnaplayer.general.ui.DividerItemDecoration;
  * Created by Tomasz Morcinek.
  * Copyright (c) 2015 SportingBet. All rights reserved.
  */
-public class ListFragment extends DaggerFragment implements Runnable, SwipeRefreshLayout.OnRefreshListener, NetworkResponseListener<List<Resource>> {
+public class ListFragment extends DaggerFragment implements Runnable, SwipeRefreshLayout.OnRefreshListener, NetworkResponseListener<List<Resource>>,MusicListAdapter.OnResourceClickListener, AbstractRecyclerViewAdapter.OnItemClickListener<Resource> {
 
     @Inject
     RetryErrorHandler errorHandler;
@@ -83,14 +85,7 @@ public class ListFragment extends DaggerFragment implements Runnable, SwipeRefre
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity()));
-        recyclerView.setAdapter(new MusicListAdapter(getActivity()));
-    }
-
-    private void invokeRecyclerViewAnimation() {
-        Animation fadeInAnimation = AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_in);
-        fadeInAnimation.setDuration(getResources().getInteger(R.integer.config_listItemAnimTime));
-        recyclerView.setLayoutAnimation(new LayoutAnimationController(fadeInAnimation));
-        recyclerView.startLayoutAnimation();
+        recyclerView.setAdapter(new MusicListAdapter(getActivity(), this, this));
     }
 
     @Override
@@ -108,10 +103,28 @@ public class ListFragment extends DaggerFragment implements Runnable, SwipeRefre
     public void success(List<Resource> object) {
         MusicListAdapter adapter = (MusicListAdapter) recyclerView.getAdapter();
         adapter.setList(object);
+        invokeRecyclerViewAnimation();
+    }
+
+    private void invokeRecyclerViewAnimation() {
+        Animation fadeInAnimation = AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_in);
+        fadeInAnimation.setDuration(getResources().getInteger(R.integer.config_listItemAnimTime));
+        recyclerView.setLayoutAnimation(new LayoutAnimationController(fadeInAnimation));
+        recyclerView.startLayoutAnimation();
     }
 
     @Override
     public void failure(Object error) {
         errorHandler.handleError(error);
+    }
+
+    @Override
+    public void onResourceClicked(View view, Resource item) {
+        Toast.makeText(getActivity(), "Resource" + item, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onItemClicked(Resource item) {
+        Toast.makeText(getActivity(), "Resource" + item, Toast.LENGTH_LONG).show();
     }
 }

@@ -31,7 +31,7 @@ public class VideoListAdapter extends AbstractRecyclerViewAdapter<Resource, Vide
     public void onBindViewHolder(ViewHolder holder, int position) {
         Resource resource = getItem(position);
         holder.titleView.setText(resource.getName());
-        initializeOnClickListener(holder, resource);
+        registerOnClickListener(holder, resource);
     }
 
     protected class ViewHolder extends RecyclerView.ViewHolder {
