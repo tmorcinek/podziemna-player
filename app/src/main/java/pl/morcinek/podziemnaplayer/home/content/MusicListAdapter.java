@@ -1,9 +1,7 @@
 package pl.morcinek.podziemnaplayer.home.content;
 
 import android.content.Context;
-import android.os.Environment;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,11 +45,15 @@ public class MusicListAdapter extends AbstractRecyclerViewAdapter<Resource, Musi
         if (isDownloaded(resource)) {
             registerOnClickListener(viewHolder, resource);
             viewHolder.titleView.setEnabled(true);
-            viewHolder.downloadButton.setVisibility(View.GONE);
+            viewHolder.downloadButton.setEnabled(false);
+            viewHolder.downloadButton.setImageResource(R.drawable.ic_action_play);
+            viewHolder.downloadButton.setBackgroundResource(android.R.color.transparent);
             viewHolder.downloadButton.setOnClickListener(null);
         } else {
             viewHolder.titleView.setEnabled(false);
-            viewHolder.downloadButton.setVisibility(View.VISIBLE);
+            viewHolder.downloadButton.setEnabled(true);
+            viewHolder.downloadButton.setImageResource(R.drawable.ic_action_download);
+            viewHolder.downloadButton.setBackgroundResource(R.drawable.download_button_selector);
             viewHolder.downloadButton.setOnClickListener(new View.OnClickListener() {
 
                 @Override
