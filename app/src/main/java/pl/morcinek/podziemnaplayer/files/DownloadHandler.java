@@ -29,9 +29,9 @@ public class DownloadHandler {
         request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI | DownloadManager.Request.NETWORK_MOBILE);
         request.setAllowedOverRoaming(false);
         request.setVisibleInDownloadsUi(false);
-        request.setTitle(getFileName(url));
+        request.setTitle(getTitle(url));
         request.setDescription(context.getString(R.string.download_file_description));
-        String hashCode = getUrlHashCode(url);
+        String hashCode = getFileName(url);
         Log.e("HASH_CODE", hashCode);
         request.setDestinationInExternalFilesDir(context, BuildConfig.DOWNLOAD_DIRECTORY, hashCode);
 //        request.allowScanningByMediaScanner();
@@ -48,13 +48,13 @@ public class DownloadHandler {
         return url.endsWith(".mp3");
     }
 
-    public static String getFileName(String url) {
+    static String getTitle(String url) {
         String[] strings = url.split("/");
         return strings[strings.length - 1];
     }
 
-    public static String getUrlHashCode(String url) {
-        String fileName = getFileName(url);
+    public static String getFileName(String url) {
+        String fileName = getTitle(url);
         return "podziemnaTV_" + fileName.hashCode() + fileName.substring(fileName.length() - 4, fileName.length());
     }
 }

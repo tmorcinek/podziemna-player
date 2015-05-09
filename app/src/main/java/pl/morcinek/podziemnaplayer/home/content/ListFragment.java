@@ -1,5 +1,7 @@
 package pl.morcinek.podziemnaplayer.home.content;
 
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -12,10 +14,13 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import pl.morcinek.podziemnaplayer.BuildConfig;
 import pl.morcinek.podziemnaplayer.R;
 import pl.morcinek.podziemnaplayer.data.Resource;
 import pl.morcinek.podziemnaplayer.data.network.NetworkRequester;
@@ -47,6 +52,9 @@ public class ListFragment extends DaggerFragment implements Runnable, SwipeRefre
     private RecyclerView recyclerView;
 
     private SwipeRefreshLayout swipeRefreshLayout;
+    private File externalFilesDir;
+
+    private MediaPlayer mediaPlayer = new MediaPlayer();
 
     @Override
     protected int getLayoutResourceId() {
@@ -66,6 +74,8 @@ public class ListFragment extends DaggerFragment implements Runnable, SwipeRefre
 
         errorHandler.registerAction(this);
         onRefresh();
+
+        externalFilesDir = getActivity().getExternalFilesDir(BuildConfig.DOWNLOAD_DIRECTORY);
     }
 
     @Override
@@ -129,6 +139,13 @@ public class ListFragment extends DaggerFragment implements Runnable, SwipeRefre
 
     @Override
     public void onItemClicked(Resource item) {
-        Toast.makeText(getActivity(), "Resource" + item, Toast.LENGTH_LONG).show();
+        File file = new File(externalFilesDir, DownloadHandler.getFileName(item.getMusicUrl()));
+        try {
+            mediaPlayer.setDataSource(getActivity(), Uri.fromFile(file));
+            mediaPlayer.prepare();
+            mediaPlayer.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

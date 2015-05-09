@@ -65,7 +65,7 @@ public class MusicListAdapter extends AbstractRecyclerViewAdapter<Resource, Musi
     }
 
     private boolean isDownloaded(Resource resource) {
-        return new File(externalFilesDir, DownloadHandler.getUrlHashCode(resource.getMusicUrl())).exists();
+        return new File(externalFilesDir, DownloadHandler.getFileName(resource.getMusicUrl())).exists();
     }
 
     protected class ViewHolder extends RecyclerView.ViewHolder {
